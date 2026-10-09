@@ -32,6 +32,8 @@ export declare function createTUITheme(highContrast: boolean, environment?: TUIE
 export declare function getTUIStatusColor(theme: TUITheme, color: string | undefined): TUIColor;
 /** Return a status marker suited to the active terminal character set. */
 export declare function getTUIStatusIcon(theme: TUITheme, icon: string, color: string | undefined): string;
+/** Return a tab section heading suited to the active terminal character set. */
+export declare function sectionTitle(theme: TUITheme, title: string): string;
 export declare const TUIThemeContext: import("react").Context<TUITheme>;
 /** Read the theme provided to the current TUI subtree. */
 export declare function useTUITheme(): TUITheme;
