@@ -1126,7 +1126,7 @@ function createHelpHint(
 
   if (activeTab === "overview") {
     const introduction = selectedStack
-      ? 'Stack "' + selectedStack + '" selected. ' + formatUiKeyHint("select", "view", ascii)
+      ? `Stack "${selectedStack}" selected. ${formatUiKeyHint("select", "view", ascii)}`
       : formatUiKeyHint("list-navigation", "Navigate", ascii);
     const controls = selectedStack
       ? [formatUiKeyHint("back", "back", ascii), ...common]
@@ -1143,7 +1143,7 @@ function createHelpHint(
   }
   if (activeTab === "files" && selectedService) {
     return [
-      'Service "' + selectedService + '"',
+      `Service "${selectedService}"`,
       formatUiKeyHint("back", "Back", ascii),
       ...common,
     ].join(separator);
