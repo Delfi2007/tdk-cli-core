@@ -502,7 +502,7 @@ export const TUIApp: React.FC<{ animated?: boolean }> = ({ animated = true }) =>
       const sgrMatch = str.match(/\x1b\[<(\d+);(\d+);(\d+)([Mm])/);
       if (sgrMatch) {
         const btn = parseInt(sgrMatch[1], 10);
-        const _x = parseInt(sgrMatch[2], 10);
+        // sgrMatch[2] is the x coordinate, which the handler does not use
         const y = parseInt(sgrMatch[3], 10);
         const release = sgrMatch[4] === "m";
 
