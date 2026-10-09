@@ -1,7 +1,7 @@
 // Copyright (c) 2026 TDK Landscape contributors
 // SPDX-License-Identifier: MIT
 import { describe, expect, it } from "vitest";
-import { createTUITheme, getTUIStatusIcon } from "../ui-theme.js";
+import { createTUITheme, getTUIStatusIcon, sectionTitle } from "../ui-theme.js";
 
 describe("tdk ui theme", () => {
   it("preserves the normal palette by default", () => {
@@ -34,6 +34,13 @@ describe("tdk ui theme", () => {
     expect(getTUIStatusIcon(theme, "!", "yellow")).toBe("[~]");
     expect(getTUIStatusIcon(theme, "x", "red")).toBe("[x]");
     expect(getTUIStatusIcon(theme, "?", "gray")).toBe("[?]");
+  });
+
+  it("formats tab section titles for Unicode and ASCII terminals", () => {
+    expect(sectionTitle(createTUITheme(false, {}), "Resources")).toBe("┌─ Resources ─");
+    expect(sectionTitle(createTUITheme(false, { TERM: "dumb" }), "Resources")).toBe(
+      "[ Resources ]",
+    );
   });
 
   it("uses a printable footer separator for plain terminals", () => {

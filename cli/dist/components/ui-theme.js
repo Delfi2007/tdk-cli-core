@@ -109,6 +109,10 @@ export function getTUIStatusIcon(theme, icon, color) {
         return "[x]";
     return "[?]";
 }
+/** Return a tab section heading suited to the active terminal character set. */
+export function sectionTitle(theme, title) {
+    return theme.ascii ? `[ ${title} ]` : `┌─ ${title} ─`;
+}
 export const TUIThemeContext = createContext(createTUITheme(false));
 /** Read the theme provided to the current TUI subtree. */
 export function useTUITheme() {
