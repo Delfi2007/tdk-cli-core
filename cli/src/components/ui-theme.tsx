@@ -25,6 +25,7 @@ export interface TUITheme {
   bannerStart: string;
   bannerEnd: string;
   selectionMarker: string;
+  separator: string;
   fileColors: Record<FileType, TUIColor>;
 }
 
@@ -128,6 +129,7 @@ export function createTUITheme(
     bannerStart: ascii ? ">>>" : "\u2593\u2592\u2591",
     bannerEnd: ascii ? "<<<" : "\u2591\u2592\u2593",
     selectionMarker: ascii ? ">>>" : "\u2593\u2592\u2591",
+    separator: ascii ? " | " : " \u2502 ",
   };
 }
 
@@ -150,6 +152,11 @@ export function getTUIStatusIcon(theme: TUITheme, icon: string, color: string | 
   if (color === "yellow") return "[~]";
   if (color === "red") return "[x]";
   return "[?]";
+}
+
+/** Return a tab section heading suited to the active terminal character set. */
+export function sectionTitle(theme: TUITheme, title: string): string {
+  return theme.ascii ? `[ ${title} ]` : `┌─ ${title} ─`;
 }
 
 export const TUIThemeContext = createContext(createTUITheme(false));

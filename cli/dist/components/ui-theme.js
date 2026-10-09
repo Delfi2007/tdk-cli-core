@@ -84,6 +84,7 @@ export function createTUITheme(highContrast, environment = process.env) {
         bannerStart: ascii ? ">>>" : "\u2593\u2592\u2591",
         bannerEnd: ascii ? "<<<" : "\u2591\u2592\u2593",
         selectionMarker: ascii ? ">>>" : "\u2593\u2592\u2591",
+        separator: ascii ? " | " : " \u2502 ",
     };
 }
 const STATUS_COLOR_THEMES = {
@@ -107,6 +108,10 @@ export function getTUIStatusIcon(theme, icon, color) {
     if (color === "red")
         return "[x]";
     return "[?]";
+}
+/** Return a tab section heading suited to the active terminal character set. */
+export function sectionTitle(theme, title) {
+    return theme.ascii ? `[ ${title} ]` : `┌─ ${title} ─`;
 }
 export const TUIThemeContext = createContext(createTUITheme(false));
 /** Read the theme provided to the current TUI subtree. */
