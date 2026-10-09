@@ -75,20 +75,6 @@ manifest/
 │   └── test_integration.star  # Integration tests (Phase 4) ⭐ NEW
 └── README.md                  # This file
 ```
-manifest/
-├── __init__.star              # Main API facade
-├── constants.star             # Constants and defaults
-├── schema.star                # Field schema definitions
-├── errors.star                # Error handling
-├── loader.star               # File loading and I/O
-├── parser.star               # JSON parsing and normalization
-├── validator.star            # Comprehensive validation ⭐ NEW (Phase 3)
-├── tests/
-│   ├── test_manifest.star    # Unit tests (Phase 1)
-│   ├── test_loader_parser.star  # Integration tests (Phase 2)
-│   └── test_validator.star   # Validator tests (Phase 3) ⭐ NEW
-└── README.md                 # This file
-```
 
 ---
 
@@ -689,5 +675,5 @@ When adding new features:
 
 ## See Also
 
-- [Refactoring Plan](../REFACTORING_MANIFEST_SYSTEM.md) - Full refactoring roadmap
+- [Refactoring Plan](../../../REFACTORING_MANIFEST_SYSTEM.md) - Full refactoring roadmap
 - [AGENTS.md](../../../AGENTS.md) - Agent ecosystem documentation

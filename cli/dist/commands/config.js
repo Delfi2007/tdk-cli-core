@@ -9,7 +9,7 @@ import { hasVerdaccioLicense } from "../generator/extension-fetch.js";
 import { generateMasterConfigs, readProjectConfig, TemplateEngine, verifyMasterConfigs, } from "../generator/template-engine.js";
 import { isMasterConfigFileName } from "../types/index.js";
 import { assertValid } from "../utils/command-helpers.js";
-import { MASTER_CONFIG_FILES } from "../utils/constants.js";
+import { MASTER_CONFIG_FILES, PROJECT_JSON } from "../utils/constants.js";
 import { checkPrismaConsistency } from "../utils/doctor-wiring.js";
 import { errorFactories, requireProjectRoot, runCommand } from "../utils/errors.js";
 import { writeJsonFile } from "../utils/file-helpers.js";
@@ -19,16 +19,6 @@ import { SERVICE_MANIFEST_SCHEMA_VERSION, validateServiceManifest, } from "../ut
 import { discoverServiceManifestPaths } from "../utils/services.js";
 import { evaluateSharedPlatformPostgres } from "../utils/shared-platform-postgres.js";
 import { validateOptionalInfraService } from "../utils/validation.js";
-/**
- * Serialize ProjectConfig to JSON-safe value.
- * ProjectConfig is guaranteed to be JSON-serializable (all properties are primitive or plain objects).
- * This wrapper documents the type relationship that TypeScript cannot infer.
- */
-function _serializeProjectConfig(config) {
-    // ProjectConfig has no index signature but is structurally compatible with JsonValue
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion
-    return config;
-}
 export const configCommand = new Command("config")
     .description("Manage project configuration and regenerate master files")
     .addCommand(new Command("regenerate")
@@ -270,7 +260,7 @@ export const configCommand = new Command("config")
     .addCommand(new Command("edit").description("Open .tdk/project.json in your $EDITOR").action(async () => {
     await runCommand(async () => {
         const projectRoot = requireProjectRoot();
-        const projectJsonPath = join(projectRoot, ".tdk", "project.json");
+        const projectJsonPath = join(projectRoot, ".tdk", PROJECT_JSON);
         if (!existsSync(projectJsonPath)) {
             throw new Error(".tdk/project.json not found");
         }
@@ -334,7 +324,7 @@ async function toggleInfraService(service, enabled) {
     }
     // Type-safe assignment: service is now narrowed to OptionalInfraKey
     config.optional_infra[service] = enabled;
-    const projectJsonPath = join(projectRoot, ".tdk", "project.json");
+    const projectJsonPath = join(projectRoot, ".tdk", PROJECT_JSON);
     // ProjectConfig is guaranteed to be JSON-serializable
     writeJsonFile(projectJsonPath, config);
     const action = enabled ? "Enabled" : "Disabled";
