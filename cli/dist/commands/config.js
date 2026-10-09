@@ -19,16 +19,6 @@ import { SERVICE_MANIFEST_SCHEMA_VERSION, validateServiceManifest, } from "../ut
 import { discoverServiceManifestPaths } from "../utils/services.js";
 import { evaluateSharedPlatformPostgres } from "../utils/shared-platform-postgres.js";
 import { validateOptionalInfraService } from "../utils/validation.js";
-/**
- * Serialize ProjectConfig to JSON-safe value.
- * ProjectConfig is guaranteed to be JSON-serializable (all properties are primitive or plain objects).
- * This wrapper documents the type relationship that TypeScript cannot infer.
- */
-function _serializeProjectConfig(config) {
-    // ProjectConfig has no index signature but is structurally compatible with JsonValue
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion
-    return config;
-}
 export const configCommand = new Command("config")
     .description("Manage project configuration and regenerate master files")
     .addCommand(new Command("regenerate")

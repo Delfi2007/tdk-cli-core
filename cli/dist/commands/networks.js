@@ -96,7 +96,6 @@ function determineDefaultDomain() {
         const firstDomain = domainList[0];
         const localhostMatch = firstDomain.match(/([\w-]+)\.localhost$/);
         if (localhostMatch) {
-            const _prefix = localhostMatch[1];
             // If it looks like a service domain, try common project names
             const commonProjects = ["tdk", "project", "app", "api", "myapp"];
             for (const project of commonProjects) {
