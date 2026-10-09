@@ -1142,11 +1142,9 @@ function createHelpHint(
     ].join(separator);
   }
   if (activeTab === "files" && selectedService) {
-    return [
-      `Service "${selectedService}"`,
-      formatUiKeyHint("back", "Back", ascii),
-      ...common,
-    ].join(separator);
+    return [`Service "${selectedService}"`, formatUiKeyHint("back", "Back", ascii), ...common].join(
+      separator,
+    );
   }
   if (activeTab === "files") {
     return ["Select service to view files", ...common].join(separator);
